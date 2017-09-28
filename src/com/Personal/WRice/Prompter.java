@@ -16,10 +16,10 @@ class Prompter {
              do {
                      System.out.print("Enter a letter:  ");
                      String guessInput = scanner.nextLine();
-                     char guess = guessInput.charAt(0);
+
 
                         try {
-                            isHit = game.applyGuess(guess);
+                            isHit = game.applyGuess(guessInput);
                             isAcceptable = true;
                             } catch (IllegalArgumentException iae) {
                              System.out.printf("%s.  Please try again. %n", iae.getMessage());
@@ -31,6 +31,14 @@ class Prompter {
     public void displayProgress() {
         System.out.printf("You have %d tries left to solve:   %s%n", game.getRemainingTries(), game.getCurrentProgress());
 
+    }
+
+    public void displayOutcome() {
+        if (game.isWon()) {
+            System.out.println("Congratulations, you win the game!");
+        } else {
+            System.out.printf("Sorry, the correct word was %s ", game.getAnswer());
+        }
     }
 
 }

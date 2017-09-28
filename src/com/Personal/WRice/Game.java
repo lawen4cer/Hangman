@@ -31,6 +31,13 @@ public class Game {
             misses += letter;
         }
         return isHit;
+    }
+
+    public boolean applyGuess(String letters){
+        if(letters.length() == 0) {
+            throw new IllegalArgumentException("No characters found");
+        }
+        return applyGuess(letters.charAt(0));
 
     }
 
@@ -49,6 +56,13 @@ public class Game {
             progress += display;
         }
         return progress;
+    }
 
+    public boolean isWon() {
+        return getCurrentProgress().indexOf('-') == -1;
+    }
+
+    public String getAnswer() {
+        return answer;
     }
 }
