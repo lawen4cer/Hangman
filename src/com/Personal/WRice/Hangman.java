@@ -3,12 +3,15 @@ package com.Personal.WRice;
 public class Hangman {
 
     public static void main(String[] args) {
-        Game game = new Game("treehouse");
+        Game game = new Game();
         Prompter prompter = new Prompter(game);
-        while (game.getRemainingTries() > 0 && !game.isWon()){
+    do{
+        do {
             prompter.displayProgress();
             prompter.promptForGuess();
-        }
-        prompter.displayOutcome();
+    } while (game.getRemainingTries() > 0 && !game.isWon());
+    prompter.displayOutcome();
+    } while (game.resetGame(prompter.getPromptForReset()));
+
     }
 }

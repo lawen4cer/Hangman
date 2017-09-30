@@ -2,14 +2,37 @@ package com.Personal.WRice;
 
 public class Game {
     public static final int MAX_MISSES = 7;
+    private static final int MAX_NUM = 5;
+    private static final int MIN_NUM = 0;
+    private String[] answerArray = {"apple", "banana", "orange", "grape", "strawberry", "pineapple",};
     private String answer;
     private String hits;
     private String misses;
+    private int randomNumber;
+    protected String progress = "";
+    protected char display = '-';
+    protected char letter = '\0';
 
-    public Game(String answer){
-        this.answer = answer.toLowerCase();
+
+
+    public Game(){
+    this.answer = answerArray[getRandomNumber()];
         hits = "";
         misses = "";
+    }
+
+    public boolean resetGame(int promptForReset) {
+        if (promptForReset == 1) {
+            setDisplay('-');
+            setCurrentProgress("");
+            setLetter('\0');
+            return true;
+        }else {return false;}
+    }
+
+    public int getRandomNumber() {
+     randomNumber = MIN_NUM + (int) (Math.random() * MAX_NUM);
+     return randomNumber;
     }
 
     private char normalizeGuess(char letter){
@@ -47,16 +70,31 @@ public class Game {
     }
 
     public String getCurrentProgress() {
-        String progress = "";
+        progress = "";
         for (char letter : answer.toCharArray()) {
-            char display = '-';
-            if(hits.indexOf(letter) != -1) {
+            display = '-';
+            if (hits.indexOf(letter) != -1) {
                 display = letter;
             }
             progress += display;
         }
         return progress;
     }
+
+    public void setCurrentProgress(String progress) {
+        this.progress = progress;
+    }
+
+    public void setDisplay(char display) {
+        this.display = display;
+    }
+
+    public void setLetter(char letter) {
+        this.letter = letter;
+
+    }
+
+
 
     public boolean isWon() {
         return getCurrentProgress().indexOf('-') == -1;

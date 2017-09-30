@@ -2,6 +2,7 @@ package com.Personal.WRice;
 import java.util.Scanner;
 
 class Prompter {
+    public int promptForReset;
     private Game game;
 
     public Prompter(Game game){
@@ -34,11 +35,22 @@ class Prompter {
     }
 
     public void displayOutcome() {
+        Scanner scan = new Scanner(System.in);
         if (game.isWon()) {
             System.out.println("Congratulations, you win the game!");
+            System.out.println("Would you like to play again?  Enter 1 to play again.. ");
+            promptForReset = scan.nextInt();
+
         } else {
             System.out.printf("Sorry, the correct word was %s ", game.getAnswer());
+            System.out.println("Would you like to play again?  Enter 1 to play again.. ");
+            promptForReset = scan.nextInt();
         }
+    }
+
+    public int getPromptForReset() {
+        return promptForReset;
+
     }
 
 }
